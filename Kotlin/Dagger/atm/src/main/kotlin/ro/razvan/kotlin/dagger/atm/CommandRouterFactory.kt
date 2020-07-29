@@ -2,7 +2,7 @@ package ro.razvan.kotlin.dagger.atm
 
 import dagger.Component
 
-@Component
+@Component(modules = [HelloWorldCommandModule::class])
 interface CommandRouterFactory {
     fun router(): CommandRouter
 
