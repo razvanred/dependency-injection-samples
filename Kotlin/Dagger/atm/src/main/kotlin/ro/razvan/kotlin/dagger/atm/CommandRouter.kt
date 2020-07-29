@@ -4,7 +4,8 @@ import ro.razvan.kotlin.dagger.atm.Command.Status
 import javax.inject.Inject
 
 class CommandRouter @Inject constructor(
-    command: Command
+    command: Command,
+    private val outputter: Outputter
 ) {
 
     private val commands: MutableMap<String, Command> = HashMap()
@@ -25,14 +26,14 @@ class CommandRouter @Inject constructor(
         val status = command.handleInput(splitInput.subList(1, splitInput.size))
 
         if (status == Status.INVALID) {
-            println("$commandKey: invalid arguments")
+            outputter("$commandKey: invalid arguments")
         }
 
         return status
     }
 
     private fun invalidCommand(input: String): Status {
-        println("Couldn't understand \"$input\". Please try again.")
+        outputter("Couldn't understand \"$input\". Please try again.")
         return Status.INVALID
     }
 }
