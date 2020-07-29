@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CommandProcessor {
+class CommandRouter {
     
     private let commands = [String: Command]()
     

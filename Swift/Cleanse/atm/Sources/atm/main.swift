@@ -1,5 +1,8 @@
-let commandProcessor = CommandProcessor()
+import Foundation
+import Cleanse
+
+let commandRouter = CommandRouterFactory.create()
 
 while(true) {
-    commandProcessor.process(input: readLine()!)
+    commandRouter.process(input: readLine()!)
 }
