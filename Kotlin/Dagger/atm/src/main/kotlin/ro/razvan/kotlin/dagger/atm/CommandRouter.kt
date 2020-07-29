@@ -38,4 +38,4 @@ class CommandRouter @Inject constructor(
     }
 }
 
-private fun String.split() = split(regex = Regex.fromLiteral("\\s+"))
+private fun String.split() = split(regex = Regex.fromLiteral(" "))
