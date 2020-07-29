@@ -9,7 +9,11 @@ import Foundation
 
 class CommandRouter {
     
-    private let commands = [String: Command]()
+    private var commands = [String: Command]()
+    
+    init(helloWorldCommand: HelloWorldCommand) {
+        commands[helloWorldCommand.key] = helloWorldCommand
+    }
     
     func process(input: String) -> Status {
         let inputSplit = input.split()
@@ -21,7 +25,7 @@ class CommandRouter {
         let commandKey = inputSplit[0]
         
         if let command = commands[commandKey] {
-            let status = command.handleInput(input: Array(inputSplit[1...inputSplit.count]))
+            let status = command.handleInput(input: Array(inputSplit[1..<inputSplit.count]))
             
             if status == Status.invalid {
                 print("\(commandKey): invalid arguments")
@@ -33,7 +37,7 @@ class CommandRouter {
         return invalidCommand(input)
     }
     
-    func invalidCommand(_ input: String) -> Status {
+    private func invalidCommand(_ input: String) -> Status {
         print("Couldn't understand \"\(input)\". Try again.")
         return Status.invalid
     }
