@@ -1,20 +1,18 @@
 package ro.razvan.java.dagger.atm;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 import ro.razvan.java.dagger.atm.Command.Status;
 
 import javax.inject.Inject;
 
 public final class CommandRouter {
 
-    private final Map<String, Command> commands = Collections.emptyMap();
+    private final Map<String, Command> commands = new HashMap<>();
 
     @Inject
-    public CommandRouter() {
-
+    public CommandRouter(HelloWorldCommand helloWorldCommand) {
+        commands.put(helloWorldCommand.key(), helloWorldCommand);
     }
 
     Status route(final String input) {
