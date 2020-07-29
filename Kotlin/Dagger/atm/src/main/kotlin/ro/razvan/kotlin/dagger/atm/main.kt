@@ -4,7 +4,7 @@ import java.util.*
 
 fun main() {
     Scanner(System.`in`).use { scanner ->
-        val commandProcessor = CommandProcessor()
+        val commandProcessor = CommandRouterFactory.create().router()
 
         while (scanner.hasNextLine()) {
             commandProcessor.route(scanner.nextLine())

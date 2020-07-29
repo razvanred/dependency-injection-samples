@@ -1,8 +1,9 @@
 package ro.razvan.kotlin.dagger.atm
 
 import ro.razvan.kotlin.dagger.atm.Command.Status
+import javax.inject.Inject
 
-class CommandProcessor {
+class CommandRouter @Inject constructor() {
 
     private val commands: Map<String, Command> = emptyMap()
 
