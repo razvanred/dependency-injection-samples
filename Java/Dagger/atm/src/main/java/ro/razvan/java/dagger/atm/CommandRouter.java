@@ -6,9 +6,16 @@ import java.util.List;
 import java.util.Map;
 import ro.razvan.java.dagger.atm.Command.Status;
 
+import javax.inject.Inject;
+
 public final class CommandRouter {
 
     private final Map<String, Command> commands = Collections.emptyMap();
+
+    @Inject
+    public CommandRouter() {
+
+    }
 
     Status route(final String input) {
         final List<String> splitInput = split(input);

@@ -6,7 +6,7 @@ public class CommandLineAtm {
 
     public static void main(String[] args) {
         try(final var scanner = new Scanner(System.in)) {
-            final var commandRouter = new CommandRouter();
+            final var commandRouter = CommandRouterFactory.create().router();
             while(scanner.hasNextLine()) {
                 commandRouter.route(scanner.nextLine());
             }
