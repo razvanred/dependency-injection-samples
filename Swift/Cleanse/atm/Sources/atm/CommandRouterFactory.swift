@@ -19,6 +19,7 @@ struct CommandRouterFactory: Cleanse.RootComponent {
     
     static func configure(binder: Binder<Scope>) {
         binder.include(module: HelloWorldCommandModule.self)
+        binder.include(module: PrintModule.self)
     }
     
     static func create() -> CommandRouterFactory.Root {

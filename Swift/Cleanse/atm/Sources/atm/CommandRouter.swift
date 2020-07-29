@@ -10,9 +10,11 @@ import Foundation
 class CommandRouter {
     
     private var commands = [String: Command]()
+    private let outputter: Outputter
     
-    init(command: Command) {
+    init(command: Command, outputter: Outputter) {
         commands[command.key] = command
+        self.outputter = outputter
     }
     
     func process(input: String) -> Status {
@@ -28,7 +30,7 @@ class CommandRouter {
             let status = command.handleInput(input: Array(inputSplit[1..<inputSplit.count]))
             
             if status == Status.invalid {
-                print("\(commandKey): invalid arguments")
+                outputter.output("\(commandKey): invalid arguments")
             }
             
             return status
@@ -38,7 +40,7 @@ class CommandRouter {
     }
     
     private func invalidCommand(_ input: String) -> Status {
-        print("Couldn't understand \"\(input)\". Try again.")
+        outputter.output("Couldn't understand \"\(input)\". Try again.")
         return Status.invalid
     }
     
