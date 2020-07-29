@@ -3,9 +3,15 @@ package ro.razvan.kotlin.dagger.atm
 import ro.razvan.kotlin.dagger.atm.Command.Status
 import javax.inject.Inject
 
-class CommandRouter @Inject constructor() {
+class CommandRouter @Inject constructor(
+    helloWorldCommand: HelloWorldCommand
+) {
 
-    private val commands: Map<String, Command> = emptyMap()
+    private val commands: MutableMap<String, Command> = HashMap()
+
+    init {
+        commands[helloWorldCommand.key] = helloWorldCommand
+    }
 
     fun route(input: String): Status {
         val splitInput = input.split()
