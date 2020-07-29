@@ -11,8 +11,8 @@ class CommandRouter {
     
     private var commands = [String: Command]()
     
-    init(helloWorldCommand: HelloWorldCommand) {
-        commands[helloWorldCommand.key] = helloWorldCommand
+    init(command: Command) {
+        commands[command.key] = command
     }
     
     func process(input: String) -> Status {
