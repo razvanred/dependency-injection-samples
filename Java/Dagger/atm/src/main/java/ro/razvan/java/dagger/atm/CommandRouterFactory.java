@@ -2,7 +2,7 @@ package ro.razvan.java.dagger.atm;
 
 import dagger.Component;
 
-@Component(modules = {HelloWorldCommandModule.class})
+@Component(modules = {HelloWorldCommandModule.class, SystemOutModule.class})
 public interface CommandRouterFactory {
 
     CommandRouter router();

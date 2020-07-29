@@ -1,14 +1,16 @@
 package ro.razvan.java.dagger.atm;
 
 import javax.inject.Inject;
-import java.util.List;
 
-public class HelloWorldCommand implements Command {
+public class HelloWorldCommand implements NoArgsCommand {
 
     public static final String COMMAND_KEY_HELLO_WORLD = "hello";
 
+    private final Outputter outputter;
+
     @Inject
-    public HelloWorldCommand() {
+    public HelloWorldCommand(Outputter outputter) {
+        this.outputter = outputter;
     }
 
     @Override
@@ -17,13 +19,8 @@ public class HelloWorldCommand implements Command {
     }
 
     @Override
-    public Status handleInput(List<String> input) {
-        if (!input.isEmpty()) {
-            return Status.INVALID;
-        }
-
-        System.out.println("world!");
-
+    public Status handle() {
+        outputter.output("world!");
         return Status.HANDLED;
     }
 }

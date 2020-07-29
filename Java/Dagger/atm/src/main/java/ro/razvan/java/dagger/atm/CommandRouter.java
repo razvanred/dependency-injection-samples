@@ -9,10 +9,12 @@ import javax.inject.Inject;
 public final class CommandRouter {
 
     private final Map<String, Command> commands = new HashMap<>();
+    private final Outputter outputter;
 
     @Inject
-    public CommandRouter(Command command) {
+    public CommandRouter(Command command, Outputter outputter) {
         commands.put(command.key(), command);
+        this.outputter = outputter;
     }
 
     Status route(final String input) {
@@ -30,14 +32,14 @@ public final class CommandRouter {
 
         final var status = command.handleInput(splitInput.subList(1, splitInput.size()));
         if(status == Status.INVALID) {
-            System.out.println(commandKey + ": invalid arguments");
+            outputter.output(commandKey + ": invalid arguments");
         }
 
         return status;
     }
 
     private Status invalidCommand(final String input) {
-        System.out.println(String.format("Could't understand \"%s\". Please try again.", input));
+        outputter.output(String.format("Could't understand \"%s\". Please try again.", input));
         return Status.INVALID;
     }
 
