@@ -13,7 +13,7 @@ protocol NoArgsCommand : Command {
 }
 
 extension NoArgsCommand {
-    func handleInput(input: [String]) -> Status {
+    func handle(input: [String]) -> Status {
         if !input.isEmpty {
             return Status.invalid
         }

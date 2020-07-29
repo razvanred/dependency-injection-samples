@@ -11,7 +11,7 @@ protocol Command {
     
     var key: String { get }
     
-    func handleInput(input: [String]) -> Status
+    func handle(input: [String]) -> Status
 
 }
 

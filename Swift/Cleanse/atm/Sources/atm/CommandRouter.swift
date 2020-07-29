@@ -27,7 +27,7 @@ class CommandRouter {
         let commandKey = inputSplit[0]
         
         if let command = commands[commandKey] {
-            let status = command.handleInput(input: Array(inputSplit[1..<inputSplit.count]))
+            let status = command.handle(input: Array(inputSplit[1..<inputSplit.count]))
             
             if status == Status.invalid {
                 outputter.output("\(commandKey): invalid arguments")
