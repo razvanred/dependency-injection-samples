@@ -1,18 +1,15 @@
+@file:Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
+
 package ro.razvan.kotlin.dagger.atm
 
 import ro.razvan.kotlin.dagger.atm.Command.Status
+import java.util.Map
 import javax.inject.Inject
 
 class CommandRouter @Inject constructor(
-    command: Command,
+    private val commands: Map<String, Command>,
     private val outputter: Outputter
 ) {
-
-    private val commands: MutableMap<String, Command> = HashMap()
-
-    init {
-        commands[command.key] = command
-    }
 
     fun route(input: String): Status {
         val splitInput = input.split()
