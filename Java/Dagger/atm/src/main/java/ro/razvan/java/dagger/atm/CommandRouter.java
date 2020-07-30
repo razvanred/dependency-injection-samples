@@ -8,12 +8,12 @@ import javax.inject.Inject;
 
 public final class CommandRouter {
 
-    private final Map<String, Command> commands = new HashMap<>();
+    private final Map<String, Command> commands;
     private final Outputter outputter;
 
     @Inject
-    public CommandRouter(Command command, Outputter outputter) {
-        commands.put(command.key(), command);
+    public CommandRouter(Map<String, Command> commands, Outputter outputter) {
+        this.commands = commands;
         this.outputter = outputter;
     }
 
