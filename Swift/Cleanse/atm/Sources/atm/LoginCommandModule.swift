@@ -13,6 +13,7 @@ struct LoginCommandModule : Module {
     static func configure(binder: Binder<Unscoped>) {
         binder
             .bind(Command.self)
+            .intoCollection()
             .to(factory: LoginCommand.init)
     }
 }

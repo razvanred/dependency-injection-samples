@@ -13,6 +13,7 @@ struct HelloWorldCommandModule : Module {
     static func configure(binder: UnscopedBinder) {
         binder
             .bind(Command.self)
+            .intoCollection()
             .to(factory: HelloWorldCommand.init)
     }
 }

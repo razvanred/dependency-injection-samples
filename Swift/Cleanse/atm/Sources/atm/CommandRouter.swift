@@ -12,8 +12,10 @@ class CommandRouter {
     private var commands = [String: Command]()
     private let outputter: Outputter
     
-    init(command: Command, outputter: Outputter) {
-        commands[command.key] = command
+    init(commands: [Command], outputter: Outputter) {
+        for command in commands {
+            self.commands[command.key] = command
+        }
         self.outputter = outputter
     }
     
