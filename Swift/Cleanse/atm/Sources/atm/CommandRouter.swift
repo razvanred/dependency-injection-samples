@@ -7,15 +7,13 @@
 
 import Foundation
 
-class CommandRouter {
+struct CommandRouter {
     
-    private var commands = [String: Command]()
+    private let commands: [String: Command]
     private let outputter: Outputter
     
     init(commands: [Command], outputter: Outputter) {
-        for command in commands {
-            self.commands[command.key] = command
-        }
+        self.commands = commands.toDictionary()
         self.outputter = outputter
     }
     
@@ -51,5 +49,13 @@ class CommandRouter {
 extension String {
     fileprivate func split() -> [String] {
         components(separatedBy: " ")
+    }
+}
+
+extension Array where Element == Command {
+    fileprivate func toDictionary() -> [String: Command] {
+        reduce(into: [String: Command](), { acc, act in
+            acc[act.key] = act
+        })
     }
 }

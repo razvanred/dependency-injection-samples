@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Database {
+class Database {
     
     private var accounts = [String: Account]()
     
@@ -16,24 +16,31 @@ struct Database {
     }
 }
 
-struct Account {
+class Account {
     let username: String
     private(set) var balance: Decimal = Decimal.zero
     
     init(username: String) {
         self.username = username
     }
+    
+    func deposit(amount: Decimal) {
+        balance += amount
+    }
 }
 
 extension Dictionary {
 
-    fileprivate func computeIfAbsent(key: Key, ifAbsent: (_ key: Key) -> Value) -> Value {
+    fileprivate mutating func computeIfAbsent(key: Key, ifAbsent: (_ key: Key) -> Value) -> Value {
         let optionalValue = self[key]
         
         if let value = optionalValue {
             return value
         }
         
-        return ifAbsent(key)
+        let value = ifAbsent(key)
+        self[key] = value
+        
+        return value
     }
 }

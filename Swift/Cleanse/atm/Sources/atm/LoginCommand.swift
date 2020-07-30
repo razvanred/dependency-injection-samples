@@ -9,7 +9,7 @@ import Foundation
 
 let COMMAND_KEY_LOGIN = "login"
 
-class LoginCommand : SingleArgCommand {
+struct LoginCommand : SingleArgCommand {
     
     private let outputter: Outputter
     private let database: Database

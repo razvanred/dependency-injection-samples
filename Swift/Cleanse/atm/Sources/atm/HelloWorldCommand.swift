@@ -9,7 +9,7 @@ import Foundation
 
 let COMMAND_KEY_HELLO_WORLD = "hello"
 
-class HelloWorldCommand : NoArgsCommand {
+struct HelloWorldCommand : NoArgsCommand {
     
     let outputter: Outputter
     

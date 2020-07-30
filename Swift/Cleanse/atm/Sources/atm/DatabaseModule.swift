@@ -10,9 +10,12 @@ import Cleanse
 
 struct DatabaseModule : Module {
     
-    static func configure(binder: Binder<Unscoped>) {
+    typealias Scope = Singleton
+    
+    static func configure(binder: Binder<Scope>) {
         binder
             .bind()
+            .sharedInScope()
             .to(factory: Database.init)
     }
 }

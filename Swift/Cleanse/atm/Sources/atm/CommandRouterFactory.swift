@@ -11,7 +11,7 @@ import Cleanse
 struct CommandRouterFactory: Cleanse.RootComponent {
     
     typealias Root = CommandRouter
-    typealias Scope = Unscoped
+    typealias Scope = Singleton
     
     static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
         return bind.to(factory: CommandRouter.init)
@@ -22,6 +22,7 @@ struct CommandRouterFactory: Cleanse.RootComponent {
         binder.include(module: HelloWorldCommandModule.self)
         binder.include(module: PrintModule.self)
         binder.include(module: DatabaseModule.self)
+        binder.include(module: DepositCommandModule.self)
     }
     
     static func create() -> CommandRouterFactory.Root {
