@@ -12,15 +12,18 @@ let COMMAND_KEY_LOGIN = "login"
 class LoginCommand : SingleArgCommand {
     
     private let outputter: Outputter
+    private let database: Database
+    
+    init(outputter: Outputter, database: Database) {
+        self.outputter = outputter
+        self.database = database
+    }
     
     var key: String { return COMMAND_KEY_LOGIN }
     
-    init(outputter: Outputter) {
-        self.outputter = outputter
-    }
-    
     func handle(arg: String) -> Status {
-        outputter.output("Logged in as \(arg)")
+        let account = database.getAccount(username: arg)
+        outputter.output("\(account.username) is logged in with balance: \(account.balance)")
         return Status.handled
     }
 }

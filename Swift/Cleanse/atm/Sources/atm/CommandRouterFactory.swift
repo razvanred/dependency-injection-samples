@@ -21,6 +21,7 @@ struct CommandRouterFactory: Cleanse.RootComponent {
         binder.include(module: LoginCommandModule.self)
         binder.include(module: HelloWorldCommandModule.self)
         binder.include(module: PrintModule.self)
+        binder.include(module: DatabaseModule.self)
     }
     
     static func create() -> CommandRouterFactory.Root {
