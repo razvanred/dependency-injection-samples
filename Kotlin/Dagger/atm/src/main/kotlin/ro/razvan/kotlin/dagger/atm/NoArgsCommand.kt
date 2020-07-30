@@ -1,16 +1,16 @@
 package ro.razvan.kotlin.dagger.atm
 
-import ro.razvan.kotlin.dagger.atm.Command.Status
+import ro.razvan.kotlin.dagger.atm.Command.Result
 
 interface NoArgsCommand : Command {
 
-    override fun handleInput(input: List<String>): Status {
-        if(input.isNotEmpty()) {
-            return Status.INVALID
+    override fun handleInput(input: List<String>): Result {
+        if (input.isNotEmpty()) {
+            return Result.invalid()
         }
         return handle()
     }
 
-    fun handle(): Status
+    fun handle(): Result
 
 }

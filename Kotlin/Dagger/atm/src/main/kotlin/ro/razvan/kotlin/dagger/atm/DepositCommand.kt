@@ -1,25 +1,21 @@
 package ro.razvan.kotlin.dagger.atm
 
-import ro.razvan.kotlin.dagger.atm.Command.Status
+import ro.razvan.kotlin.dagger.atm.Command.Result
+import java.math.BigDecimal
 import javax.inject.Inject
 
 const val COMMAND_KEY_DEPOSIT = "deposit"
 
 class DepositCommand @Inject constructor(
     private val outputter: Outputter,
-    private val database: Database
-) : Command {
+    private val account: Database.Account
+) : BigDecimalCommand {
 
-    override fun handleInput(input: List<String>): Status {
-        if (input.size != 2) return Status.INVALID
-
-        val account = database.getAccount(username = input[0])
-        val amount = input[1].toBigDecimalOrNull() ?: return Status.INVALID
-
+    override fun handleAmount(amount: BigDecimal): Result {
         account.deposit(amount)
         outputter("${account.username} now has: ${account.balance}")
 
-        return Status.HANDLED
+        return Result.handled()
     }
 
     override val key: String

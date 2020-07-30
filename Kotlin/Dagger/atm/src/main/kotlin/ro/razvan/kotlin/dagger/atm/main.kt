@@ -4,10 +4,10 @@ import java.util.*
 
 fun main() {
     Scanner(System.`in`).use { scanner ->
-        val commandProcessor = CommandRouterFactory.create().router()
+        val commandProcessor = CommandProcessorFactory.create().processor()
 
         while (scanner.hasNextLine()) {
-            commandProcessor.route(scanner.nextLine())
+            commandProcessor.process(scanner.nextLine())
         }
     }
 }

@@ -2,6 +2,7 @@
 
 package ro.razvan.kotlin.dagger.atm
 
+import ro.razvan.kotlin.dagger.atm.Command.Result
 import ro.razvan.kotlin.dagger.atm.Command.Status
 import java.util.Map
 import javax.inject.Inject
@@ -11,7 +12,7 @@ class CommandRouter @Inject constructor(
     private val outputter: Outputter
 ) {
 
-    fun route(input: String): Status {
+    fun route(input: String): Result {
         val splitInput = input.split()
         if (splitInput.isEmpty()) {
             return invalidCommand(input)
@@ -20,18 +21,18 @@ class CommandRouter @Inject constructor(
         val commandKey = splitInput[0]
         val command = commands[commandKey] ?: return invalidCommand(input)
 
-        val status = command.handleInput(splitInput.subList(1, splitInput.size))
+        val result = command.handleInput(splitInput.subList(1, splitInput.size))
 
-        if (status == Status.INVALID) {
+        if (result.status == Status.INVALID) {
             outputter("$commandKey: invalid arguments")
         }
 
-        return status
+        return result
     }
 
-    private fun invalidCommand(input: String): Status {
+    private fun invalidCommand(input: String): Result {
         outputter("Couldn't understand \"$input\". Please try again.")
-        return Status.INVALID
+        return Result.invalid()
     }
 }
 
