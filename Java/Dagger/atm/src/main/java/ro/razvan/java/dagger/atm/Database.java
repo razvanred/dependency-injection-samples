@@ -1,10 +1,12 @@
 package ro.razvan.java.dagger.atm;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+@Singleton
 public final class Database {
 
     private final Map<String, Account> accounts = new HashMap<>();
@@ -31,6 +33,10 @@ public final class Database {
 
         public String username() {
             return username;
+        }
+
+        public void deposit(BigDecimal amount) {
+            balance = balance.add(amount);
         }
     }
 }

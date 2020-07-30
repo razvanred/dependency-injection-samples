@@ -2,7 +2,15 @@ package ro.razvan.java.dagger.atm;
 
 import dagger.Component;
 
-@Component(modules = {LoginCommandModule.class, HelloWorldCommandModule.class, SystemOutModule.class})
+import javax.inject.Singleton;
+
+@Component(modules = {
+        LoginCommandModule.class,
+        HelloWorldCommandModule.class,
+        DepositCommandModule.class,
+        SystemOutModule.class
+})
+@Singleton
 public interface CommandRouterFactory {
 
     CommandRouter router();
