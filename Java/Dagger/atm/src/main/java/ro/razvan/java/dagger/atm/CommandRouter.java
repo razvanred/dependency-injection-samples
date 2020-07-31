@@ -1,10 +1,11 @@
 package ro.razvan.java.dagger.atm;
 
-import java.util.*;
-
-import ro.razvan.java.dagger.atm.Command.Status;
+import ro.razvan.java.dagger.atm.Command.Result;
 
 import javax.inject.Inject;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public final class CommandRouter {
 
@@ -17,30 +18,30 @@ public final class CommandRouter {
         this.outputter = outputter;
     }
 
-    Status route(final String input) {
+    Result route(final String input) {
         final List<String> splitInput = split(input);
-        if(splitInput.isEmpty()) {
+        if (splitInput.isEmpty()) {
             return invalidCommand(input);
         }
 
         final var commandKey = splitInput.get(0);
         final var command = commands.get(commandKey);
 
-        if(command == null) {
+        if (command == null) {
             return invalidCommand(input);
         }
 
-        final var status = command.handleInput(splitInput.subList(1, splitInput.size()));
-        if(status == Status.INVALID) {
+        final var result = command.handleInput(splitInput.subList(1, splitInput.size()));
+        if (result.isInvalid()) {
             outputter.output(commandKey + ": invalid arguments");
         }
 
-        return status;
+        return result;
     }
 
-    private Status invalidCommand(final String input) {
+    private Result invalidCommand(final String input) {
         outputter.output(String.format("Could't understand \"%s\". Please try again.", input));
-        return Status.INVALID;
+        return Result.invalid();
     }
 
     private static List<String> split(final String input) {

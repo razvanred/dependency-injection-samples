@@ -2,19 +2,18 @@ package ro.razvan.java.dagger.atm;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
-import java.util.List;
 
-public class DepositCommand implements Command {
+public class DepositCommand implements BigDecimalCommand {
 
     public static final String COMMAND_KEY_DEPOSIT = "deposit";
 
     private final Outputter outputter;
-    private final Database database;
+    private final Database.Account account;
 
     @Inject
-    public DepositCommand(Outputter outputter, Database database) {
+    public DepositCommand(Outputter outputter, Database.Account account) {
         this.outputter = outputter;
-        this.database = database;
+        this.account = account;
     }
 
     @Override
@@ -23,23 +22,9 @@ public class DepositCommand implements Command {
     }
 
     @Override
-    public Status handleInput(List<String> input) {
-        if (input.size() != 2) {
-            return Status.INVALID;
-        }
-
-        final var account = database.getAccount(input.get(0));
-        final BigDecimal amount;
-
-        try {
-            amount = new BigDecimal(input.get(1));
-        } catch (NumberFormatException exc) {
-            return Status.INVALID;
-        }
-
+    public Result handleAmount(BigDecimal amount) {
         account.deposit(amount);
         outputter.output(account.username() + " now has: " + account.balance());
-
-        return Status.HANDLED;
+        return Result.handled();
     }
 }

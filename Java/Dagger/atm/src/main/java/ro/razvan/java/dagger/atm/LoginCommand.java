@@ -8,18 +8,24 @@ public class LoginCommand implements SingleArgCommand {
 
     private final Outputter outputter;
     private final Database database;
+    private final UserCommandsRouter.Factory userCommandsRouterFactory;
 
     @Inject
-    public LoginCommand(Outputter outputter, Database database) {
+    public LoginCommand(
+            Outputter outputter,
+            Database database,
+            UserCommandsRouter.Factory userCommandsRouterFactory
+    ) {
         this.outputter = outputter;
         this.database = database;
+        this.userCommandsRouterFactory = userCommandsRouterFactory;
     }
 
     @Override
-    public Status handleArg(String username) {
+    public Result handleArg(String username) {
         final var account = database.getAccount(username);
         outputter.output(account.username() + " is logged in with balance: " + account.balance());
-        return Status.HANDLED;
+        return Result.enterNestedCommandSet(userCommandsRouterFactory.create(account).router());
     }
 
     @Override

@@ -19,8 +19,8 @@ public class HelloWorldCommand implements NoArgsCommand {
     }
 
     @Override
-    public Status handle() {
+    public Result handle() {
         outputter.output("world!");
-        return Status.HANDLED;
+        return Result.handled();
     }
 }

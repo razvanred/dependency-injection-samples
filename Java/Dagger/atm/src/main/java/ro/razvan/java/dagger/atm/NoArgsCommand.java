@@ -5,10 +5,10 @@ import java.util.List;
 public interface NoArgsCommand extends Command {
 
     @Override
-    default Status handleInput(List<String> input) {
-        if(!input.isEmpty()) return Status.INVALID;
+    default Result handleInput(List<String> input) {
+        if (!input.isEmpty()) return Result.invalid();
         return handle();
     }
 
-    Status handle();
+    Result handle();
 }

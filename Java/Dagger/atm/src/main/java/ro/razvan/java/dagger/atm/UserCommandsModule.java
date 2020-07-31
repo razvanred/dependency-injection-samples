@@ -6,7 +6,7 @@ import dagger.multibindings.IntoMap;
 import dagger.multibindings.StringKey;
 
 @Module
-public interface DepositCommandModule {
+public interface UserCommandsModule {
 
     @Binds
     @IntoMap
