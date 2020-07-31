@@ -1,6 +1,5 @@
 package ro.razvan.kotlin.dagger.atm
 
-import ro.razvan.kotlin.dagger.atm.Command.Result
 import java.math.BigDecimal
 import javax.inject.Inject
 
@@ -11,11 +10,9 @@ class DepositCommand @Inject constructor(
     private val account: Database.Account
 ) : BigDecimalCommand {
 
-    override fun handleAmount(amount: BigDecimal): Result {
+    override fun handleAmount(amount: BigDecimal) {
         account.deposit(amount)
         outputter("${account.username} now has: ${account.balance}")
-
-        return Result.handled()
     }
 
     override val key: String

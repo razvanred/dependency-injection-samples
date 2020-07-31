@@ -8,7 +8,8 @@ import javax.inject.Singleton
         UserCommandsRouter.InstallationModule::class,
         HelloWorldCommandModule::class,
         LoginCommandModule::class,
-        SystemOutModule::class
+        SystemOutModule::class,
+        AmountsModule::class
     ]
 )
 @Singleton

@@ -13,4 +13,9 @@ interface UserCommandsModule {
     @StringKey(COMMAND_KEY_DEPOSIT)
     fun bindDepositCommand(command: DepositCommand): Command
 
+    @Binds
+    @IntoMap
+    @StringKey(COMMAND_KEY_WITHDRAW)
+    fun bindWithdrawCommand(command: WithdrawCommand): Command
+
 }

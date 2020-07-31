@@ -6,9 +6,10 @@ import java.math.BigDecimal
 interface BigDecimalCommand : SingleArgCommand {
 
     override fun handleArg(arg: String): Result {
-        return arg.toBigDecimalOrNull()?.let(::handleAmount) ?: Result.invalid()
+        arg.toBigDecimalOrNull()?.let(::handleAmount)
+        return Result.handled()
     }
 
-    fun handleAmount(amount: BigDecimal): Result
+    fun handleAmount(amount: BigDecimal)
 
 }
