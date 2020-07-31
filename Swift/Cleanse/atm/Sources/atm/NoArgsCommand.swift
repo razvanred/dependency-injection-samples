@@ -9,13 +9,13 @@ import Foundation
 
 protocol NoArgsCommand : Command {
     
-    func handle() -> Status
+    func handle() -> Result
 }
 
 extension NoArgsCommand {
-    func handle(input: [String]) -> Status {
+    func handle(input: [String]) -> Result {
         if !input.isEmpty {
-            return Status.invalid
+            return Result.invalid()
         }
         return handle()
     }

@@ -17,7 +17,7 @@ struct CommandRouter {
         self.outputter = outputter
     }
     
-    func process(input: String) -> Status {
+    func route(input: String) -> Result {
         let inputSplit = input.split()
         
         if(inputSplit.isEmpty) {
@@ -27,21 +27,21 @@ struct CommandRouter {
         let commandKey = inputSplit[0]
         
         if let command = commands[commandKey] {
-            let status = command.handle(input: Array(inputSplit[1..<inputSplit.count]))
+            let result = command.handle(input: Array(inputSplit[1..<inputSplit.count]))
             
-            if status == Status.invalid {
+            if result.isInvalid {
                 outputter.output("\(commandKey): invalid arguments")
             }
             
-            return status
+            return result
         }
         
         return invalidCommand(input)
     }
     
-    private func invalidCommand(_ input: String) -> Status {
+    private func invalidCommand(_ input: String) -> Result {
         outputter.output("Couldn't understand \"\(input)\". Try again.")
-        return Status.invalid
+        return Result.invalid()
     }
     
 }

@@ -6,3 +6,22 @@
 //
 
 import Foundation
+import Cleanse
+
+struct UserCommandsRouter: Component {
+    
+    typealias Seed = Account
+    
+    typealias Scope = Unscoped
+    
+    typealias Root = CommandRouter
+    
+    static func configure(binder: Binder<Scope>) {
+        binder.include(module: DepositCommandModule.self)
+    }
+    
+    static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {
+        bind.to(factory: CommandRouter.init)
+    }
+    
+}

@@ -17,10 +17,10 @@ struct HelloWorldCommand : NoArgsCommand {
         self.outputter = outputter
     }
     
-    var key: String { return COMMAND_KEY_HELLO_WORLD }
+    var key: String { COMMAND_KEY_HELLO_WORLD }
     
-    func handle() -> Status {
+    func handle() -> Result {
         outputter.output("world!")
-        return Status.handled
+        return Result.handled()
     }
 }

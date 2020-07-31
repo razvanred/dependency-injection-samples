@@ -9,16 +9,16 @@ import Foundation
 
 protocol SingleArgCommand : Command {
     
-    func handle(arg: String) -> Status
+    func handle(arg: String) -> Result
     
 }
 
 extension SingleArgCommand {
     
-    func handle(input: [String]) -> Status {
+    func handle(input: [String]) -> Result {
         
         if input.count != 1 {
-            return Status.invalid
+            return Result.invalid()
         }
         
         return handle(arg: input[0])
