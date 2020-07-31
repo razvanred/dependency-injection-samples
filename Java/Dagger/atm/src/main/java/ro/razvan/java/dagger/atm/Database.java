@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.util.Objects.requireNonNull;
+
 @Singleton
 public final class Database {
 
@@ -36,7 +38,11 @@ public final class Database {
         }
 
         public void deposit(BigDecimal amount) {
-            balance = balance.add(amount);
+            balance = balance.add(requireNonNull(amount));
+        }
+
+        public void withdraw(final BigDecimal amount) {
+            balance = balance.subtract(requireNonNull(amount));
         }
     }
 }

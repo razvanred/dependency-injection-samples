@@ -13,4 +13,9 @@ public interface UserCommandsModule {
     @StringKey(DepositCommand.COMMAND_KEY_DEPOSIT)
     Command bindDepositCommand(DepositCommand command);
 
+    @Binds
+    @IntoMap
+    @StringKey(WithdrawCommand.COMMAND_KEY_WITHDRAW)
+    Command bindWithdrawCommand(WithdrawCommand command);
+
 }

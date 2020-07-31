@@ -8,7 +8,8 @@ import javax.inject.Singleton;
         LoginCommandModule.class,
         HelloWorldCommandModule.class,
         SystemOutModule.class,
-        UserCommandsRouter.InstallationModule.class
+        UserCommandsRouter.InstallationModule.class,
+        AmountsModule.class
 })
 @Singleton
 public interface CommandProcessorFactory {

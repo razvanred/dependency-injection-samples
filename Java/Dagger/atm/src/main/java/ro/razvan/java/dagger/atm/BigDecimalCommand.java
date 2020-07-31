@@ -7,11 +7,12 @@ public interface BigDecimalCommand extends SingleArgCommand {
     @Override
     default Result handleArg(String arg) {
         try {
-            return handleAmount(new BigDecimal(arg));
+            handleAmount(new BigDecimal(arg));
+            return Result.handled();
         } catch (NumberFormatException exc) {
             return Result.invalid();
         }
     }
 
-    Result handleAmount(BigDecimal amount);
+    void handleAmount(BigDecimal amount);
 }

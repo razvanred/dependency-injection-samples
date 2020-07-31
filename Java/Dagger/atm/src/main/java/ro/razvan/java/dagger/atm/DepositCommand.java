@@ -22,9 +22,8 @@ public class DepositCommand implements BigDecimalCommand {
     }
 
     @Override
-    public Result handleAmount(BigDecimal amount) {
+    public void handleAmount(BigDecimal amount) {
         account.deposit(amount);
         outputter.output(account.username() + " now has: " + account.balance());
-        return Result.handled();
     }
 }
