@@ -11,8 +11,6 @@ import Cleanse
 struct UserCommandsModule : Module {
     
     static func configure(binder: UnscopedBinder) {
-        binder.include(module: AmountsModule.self)
-        
         binder
             .bind(Command.self)
             .intoCollection()

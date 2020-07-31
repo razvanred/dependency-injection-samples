@@ -23,6 +23,7 @@ struct CommandProcessorFactory: Cleanse.RootComponent {
         binder.include(module: HelloWorldCommandModule.self)
         binder.include(module: PrintModule.self)
         binder.include(module: DatabaseModule.self)
+        binder.include(module: AmountsModule.self)
         
         binder.install(dependency: UserCommandsRouter.self)
     }
