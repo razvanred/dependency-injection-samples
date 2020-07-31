@@ -14,18 +14,21 @@ struct DepositCommand : DecimalCommand {
     private let outputter: Outputter
     private let database: Database
     private let account: Account
+    private let withdrawalLimiter: WithdrawalLimiter
     
-    init(outputter: Outputter, database: Database, account: Account) {
+    init(outputter: Outputter, database: Database, account: Account, withdrawalLimiter: WithdrawalLimiter) {
         self.outputter = outputter
         self.database = database
         self.account = account
+        self.withdrawalLimiter = withdrawalLimiter
     }
     
     func handle(amount: Decimal) {
         account.deposit(amount: amount)
+        withdrawalLimiter.recordDeposit(amount: amount)
         outputter.output("\(account.username) now has: \(account.balance)")
     }
     
-    var key: String { return COMMAND_KEY_DEPOSIT }
+    var key: String { COMMAND_KEY_DEPOSIT }
     
 }

@@ -18,7 +18,7 @@ struct AmountsModule : Module {
         
         binder
             .bind()
-            .tagged(with: MaximumBalance.self)
+            .tagged(with: MaximumWithdrawal.self)
             .to(value: Decimal(1_000))
     }
 }
@@ -27,6 +27,6 @@ struct MinimumBalance : Tag {
     typealias Element = Decimal
 }
 
-struct MaximumBalance : Tag {
+struct MaximumWithdrawal : Tag {
     typealias Element = Decimal
 }

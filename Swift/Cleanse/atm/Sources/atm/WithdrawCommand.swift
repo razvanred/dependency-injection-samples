@@ -16,18 +16,18 @@ struct WithdrawCommand : DecimalCommand {
     private let outputter: Outputter
     
     private let minimumBalance: Decimal
-    private let maximumWithdrawal: Decimal
+    private let withdrawalLimiter: WithdrawalLimiter
     
     init(
         account: Account,
         outputter: Outputter,
         minimumBalance: TaggedProvider<MinimumBalance>,
-        maximumWithdrawal: TaggedProvider<MaximumBalance>
+        withdrawalLimiter: WithdrawalLimiter
     ) {
         self.account = account
         self.outputter = outputter
         self.minimumBalance = minimumBalance.get()
-        self.maximumWithdrawal = maximumWithdrawal.get()
+        self.withdrawalLimiter = withdrawalLimiter
     }
     
     var key: String { COMMAND_KEY_WITHDRAW }
@@ -38,8 +38,10 @@ struct WithdrawCommand : DecimalCommand {
             return
         }
         
-        if amount > maximumWithdrawal {
-            outputter.output("Maximum withdrawal reached")
+        let remainingWithdrawalLimit = withdrawalLimiter.remainingWithdrawalLimit
+        
+        if amount > remainingWithdrawalLimit {
+            outputter.output("You may not withdraw \(amount); you may withdraw \(remainingWithdrawalLimit) in this session")
             return
         }
         
@@ -51,6 +53,7 @@ struct WithdrawCommand : DecimalCommand {
         }
         
         account.withdraw(amount: amount)
+        withdrawalLimiter.recordWithdrawal(amount: amount)
         outputter.output("Your new balance is: \(account.balance)")
     }
 }
