@@ -18,4 +18,14 @@ public interface UserCommandsModule {
     @StringKey(WithdrawCommand.COMMAND_KEY_WITHDRAW)
     Command bindWithdrawCommand(WithdrawCommand command);
 
+    @Binds
+    @IntoMap
+    @StringKey(BalanceCommand.COMMAND_KEY_BALANCE)
+    Command bindBalanceCommand(BalanceCommand command);
+
+    @Binds
+    @IntoMap
+    @StringKey(LogoutCommand.COMMAND_KEY_LOGOUT)
+    Command bindLogoutCommand(LogoutCommand command);
+
 }
