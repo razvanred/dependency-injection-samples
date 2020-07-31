@@ -8,7 +8,7 @@
 import Foundation
 import Cleanse
 
-struct CommandRouterFactory: Cleanse.RootComponent {
+struct CommandProcessorFactory: Cleanse.RootComponent {
     
     typealias Root = CommandRouter
     typealias Scope = Singleton
@@ -25,8 +25,8 @@ struct CommandRouterFactory: Cleanse.RootComponent {
         binder.include(module: DepositCommandModule.self)
     }
     
-    static func create() -> CommandRouterFactory.Root {
-        try! ComponentFactory.of(CommandRouterFactory.self).build(())
+    static func create() -> CommandProcessorFactory.Root {
+        try! ComponentFactory.of(CommandProcessorFactory.self).build(())
     }
     
 }
