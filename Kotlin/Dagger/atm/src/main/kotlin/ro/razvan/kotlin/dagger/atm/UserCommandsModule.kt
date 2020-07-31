@@ -18,4 +18,14 @@ interface UserCommandsModule {
     @StringKey(COMMAND_KEY_WITHDRAW)
     fun bindWithdrawCommand(command: WithdrawCommand): Command
 
+    @Binds
+    @IntoMap
+    @StringKey(COMMAND_KEY_LOGOUT)
+    fun bindLogoutCommand(command: LogoutCommand): Command
+
+    @Binds
+    @IntoMap
+    @StringKey(COMMAND_KEY_BALANCE)
+    fun bindBalanceCommand(command: BalanceCommand): Command
+
 }
