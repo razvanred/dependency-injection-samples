@@ -27,6 +27,10 @@ class Account {
     func deposit(amount: Decimal) {
         balance += amount
     }
+    
+    func withdraw(amount: Decimal) {
+        balance -= amount
+    }
 }
 
 extension Dictionary {

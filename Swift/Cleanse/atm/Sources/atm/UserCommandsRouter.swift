@@ -17,7 +17,7 @@ struct UserCommandsRouter: Component {
     typealias Root = CommandRouter
     
     static func configure(binder: Binder<Scope>) {
-        binder.include(module: DepositCommandModule.self)
+        binder.include(module: UserCommandsModule.self)
     }
     
     static func configureRoot(binder bind: ReceiptBinder<Root>) -> BindingReceipt<Root> {

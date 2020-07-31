@@ -21,10 +21,9 @@ struct DepositCommand : DecimalCommand {
         self.account = account
     }
     
-    func handle(amount: Decimal) -> Result {
+    func handle(amount: Decimal) {
         account.deposit(amount: amount)
         outputter.output("\(account.username) now has: \(account.balance)")
-        return Result.handled()
     }
     
     var key: String { return COMMAND_KEY_DEPOSIT }

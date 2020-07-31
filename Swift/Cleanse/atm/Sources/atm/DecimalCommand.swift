@@ -9,7 +9,7 @@ import Foundation
 
 protocol DecimalCommand : SingleArgCommand {
     
-    func handle(amount: Decimal) -> Result
+    func handle(amount: Decimal)
     
 }
 
@@ -18,7 +18,8 @@ extension DecimalCommand {
     func handle(arg: String) -> Result {
         
         if let d = Decimal(string: arg) {
-            return handle(amount: d)
+            handle(amount: d)
+            return Result.handled()
         }
         
         return Result.invalid()
