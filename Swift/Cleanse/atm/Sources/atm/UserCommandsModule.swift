@@ -20,6 +20,16 @@ struct UserCommandsModule : Module {
             .bind(Command.self)
             .intoCollection()
             .to(factory: WithdrawCommand.init)
+        
+        binder
+            .bind(Command.self)
+            .intoCollection()
+            .to(factory: LogoutCommand.init)
+        
+        binder
+            .bind(Command.self)
+            .intoCollection()
+            .to(factory: BalanceCommand.init)
     }
 
 }
