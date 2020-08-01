@@ -2,7 +2,7 @@ package ro.razvan.java.dagger.atm;
 
 import javax.inject.Inject;
 
-public class HelloWorldCommand implements NoArgsCommand {
+public final class HelloWorldCommand implements NoArgsCommand {
 
     public static final String COMMAND_KEY_HELLO_WORLD = "hello";
 

@@ -2,7 +2,7 @@ package ro.razvan.java.dagger.atm;
 
 import javax.inject.Inject;
 
-public class LogoutCommand implements NoArgsCommand {
+public final class LogoutCommand implements NoArgsCommand {
 
     public static final String COMMAND_KEY_LOGOUT = "logout";
 

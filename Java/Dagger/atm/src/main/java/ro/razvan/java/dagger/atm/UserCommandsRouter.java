@@ -5,6 +5,7 @@ import dagger.Module;
 import dagger.Subcomponent;
 
 @Subcomponent(modules = {UserCommandsModule.class})
+@PerSession
 public interface UserCommandsRouter {
 
     CommandRouter router();

@@ -2,7 +2,7 @@ package ro.razvan.java.dagger.atm;
 
 import javax.inject.Inject;
 
-public class BalanceCommand implements NoArgsCommand {
+public final class BalanceCommand implements NoArgsCommand {
 
     public static final String COMMAND_KEY_BALANCE = "balance";
 

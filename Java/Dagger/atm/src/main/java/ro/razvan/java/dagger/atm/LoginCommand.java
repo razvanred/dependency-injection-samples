@@ -2,7 +2,7 @@ package ro.razvan.java.dagger.atm;
 
 import javax.inject.Inject;
 
-public class LoginCommand implements SingleArgCommand {
+public final class LoginCommand implements SingleArgCommand {
 
     public static final String COMMAND_KEY_LOGIN = "login";
 

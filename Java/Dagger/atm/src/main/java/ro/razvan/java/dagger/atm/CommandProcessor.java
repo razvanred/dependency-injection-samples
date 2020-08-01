@@ -8,7 +8,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 @Singleton
-public class CommandProcessor {
+public final class CommandProcessor {
 
     private final Deque<CommandRouter> commandRouterStack = new ArrayDeque<>();
 
