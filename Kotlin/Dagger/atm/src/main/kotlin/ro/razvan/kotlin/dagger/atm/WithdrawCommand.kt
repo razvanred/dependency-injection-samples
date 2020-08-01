@@ -9,7 +9,7 @@ class WithdrawCommand @Inject constructor(
     private val account: Database.Account,
     private val outputter: Outputter,
     @MinimumBalance private val minimumBalance: BigDecimal,
-    @MaximumWithdrawal private val maximumWithdrawal: BigDecimal
+    private val withdrawalLimiter: WithdrawalLimiter
 ) : BigDecimalCommand {
 
     override fun handleAmount(amount: BigDecimal) {
@@ -18,8 +18,12 @@ class WithdrawCommand @Inject constructor(
             return
         }
 
-        if (amount > maximumWithdrawal) {
-            outputter("Maximum withdrawal reached")
+        val remainingWithdrawalLimit = withdrawalLimiter.remainingWithdrawLimit
+
+        if (amount > remainingWithdrawalLimit) {
+            outputter(
+                "You may not withdraw $amount; you may withdraw $remainingWithdrawalLimit more in this session"
+            )
             return
         }
 
@@ -31,6 +35,7 @@ class WithdrawCommand @Inject constructor(
         }
 
         account.withdraw(amount)
+        withdrawalLimiter.recordWithdrawal(amount)
         outputter("Your new balance is: ${account.balance}")
     }
 

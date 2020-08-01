@@ -7,11 +7,13 @@ const val COMMAND_KEY_DEPOSIT = "deposit"
 
 class DepositCommand @Inject constructor(
     private val outputter: Outputter,
-    private val account: Database.Account
+    private val account: Database.Account,
+    private val withdrawalLimiter: WithdrawalLimiter
 ) : BigDecimalCommand {
 
     override fun handleAmount(amount: BigDecimal) {
         account.deposit(amount)
+        withdrawalLimiter.recordDeposit(amount)
         outputter("${account.username} now has: ${account.balance}")
     }
 
